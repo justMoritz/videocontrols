@@ -27,7 +27,7 @@ var videocontrol = function(videoID){
     // Keep Checking if Video is playing
     setInterval(function(){
       if(video.playing){
-        $(video).addClass('this--visible');
+        addClass(video, 'this--visible');
       }else{
         video.play();
       }
