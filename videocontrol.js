@@ -1,11 +1,12 @@
 var videocontrol = function(videoID){
-
   // Non ES6 class fuctions
   function hasClass(ele,cls) {
     return !!ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
   }
   function addClass(ele,cls) {
-    if (!hasClass(ele,cls)) ele.className += " "+cls;
+    if (!hasClass(ele,cls)){
+      ele.className += " "+cls;
+    }
   }
   function removeClass(ele,cls) {
     if (hasClass(ele,cls)) {
@@ -25,10 +26,15 @@ var videocontrol = function(videoID){
   var video = document.getElementById(videoID);
   if(video !== null){
     // Keep Checking if Video is playing
-    setInterval(function(){
+    var video_play_checker = setInterval(function(){
+      // if the video is finally playing, add Class and stop checking
       if(video.playing){
         addClass(video, 'this--visible');
-      }else{
+        clearInterval(video_play_checker);
+      }
+      // else try to play the video
+      // (most likely until user interacts with page)
+      else{
         video.play();
       }
     }, 500);
